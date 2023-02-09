@@ -1,0 +1,56 @@
+# Copyright (C) 2021 HiHope Open Source Organization .
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+group("firmware") {
+  deps = [
+      ":qcom.a530_pfp",
+      ":qcom.a530_pm4",
+      ":qcom.a540_gpmu",
+      ":qcom.a540_zap",
+  ]
+}
+
+ohos_prebuilt_etc("qcom.a530_pfp") {
+    source = "qcom/a530_pfp.fw"
+    part_name = "qualcomm_products"
+    install_images = [ ramdisk_base_dir ]
+    module_install_dir = "lib/firmware/qcom"
+    install_enable = true
+}
+
+ohos_prebuilt_etc("qcom.a530_pm4") {
+    source = "qcom/a530_pm4.fw"
+    part_name = "qualcomm_products"
+    install_images = [ ramdisk_base_dir ]
+    module_install_dir = "lib/firmware/qcom"
+    install_enable = true
+}
+
+ohos_prebuilt_etc("qcom.a540_gpmu") {
+    source = "qcom/a540_gpmu.fw2"
+    part_name = "qualcomm_products"
+    install_images = [ ramdisk_base_dir ]
+    module_install_dir = "lib/firmware/qcom"
+    install_enable = true
+}
+
+ohos_prebuilt_etc("qcom.a540_zap") {
+    source = "qcom/msm8998/xiaomi/a540_zap.mbn"
+    part_name = "qualcomm_products"
+    install_images = [ ramdisk_base_dir ]
+    module_install_dir = "lib/firmware/qcom"
+    install_enable = true
+}
+

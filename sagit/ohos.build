@@ -1,0 +1,15 @@
+{
+    "subsystem": "qualcomm_products",
+    "parts": {
+        "qualcomm_products": {
+            "module_list": [
+                "//device/board/xiaomi/${device_name}:sagit_group",
+                "//vendor/xiaomi/${product_name}/bluetooth:libbt_vendor",
+                "//vendor/xiaomi/${product_name}/bluetooth:BCM4362A2.hcd"
+            ],
+            "test_list": [
+                "//kernel/linux/build/test:linuxkerneltest"
+            ]
+        }
+    }
+}

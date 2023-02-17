@@ -50,7 +50,7 @@ ohos_prebuilt_etc("qcom.a540_zap") {
     source = "qcom/msm8998/xiaomi/a540_zap.mbn"
     part_name = "qualcomm_products"
     install_images = [ ramdisk_base_dir ]
-    module_install_dir = "lib/firmware/qcom"
+    module_install_dir = "lib/firmware/qcom/msm8998/xiaomi"
     install_enable = true
 }
 

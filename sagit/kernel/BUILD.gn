@@ -18,7 +18,7 @@ linux_kernel_version = "linux-sagit"
 kernel_source_dir = "//kernel/linux/$linux_kernel_version"
 
 # 判断内核编译类型
-kernel_image = "Image"
+kernel_image = "Image.gz"
 defconfig_file = "sagit_oh_defconfig"
 
 group("sagit_kernel") {

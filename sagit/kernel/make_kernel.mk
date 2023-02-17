@@ -1,6 +1,6 @@
 # ohos makefile to build kernel
 
-KERNEL_CONFIG_PATH = $(PROJECT_ROOT)/device/board/xiaomi/sagit/kernel/config
+KERNEL_CONFIG_PATH = $(PROJECT_ROOT)/device/board/xiaomi/sagit/kernel/configs
 export INSTALL_MOD_PATH := $(PROJECT_ROOT)/device/board/xiaomi/sagit/modules
 PREBUILTS_GCC_DIR := $(PROJECT_ROOT)/prebuilts/gcc
 PREBUILTS_CLANG_DIR := $(PROJECT_ROOT)/prebuilts/clang
@@ -16,6 +16,7 @@ ifeq ($(KERNEL_ARCH), arm)
 else ifeq ($(KERNEL_ARCH), arm64)
     KERNEL_TARGET_TOOLCHAIN := $(PREBUILTS_GCC_DIR)/linux-x86/aarch64/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin
     KERNEL_TARGET_TOOLCHAIN_PREFIX := $(KERNEL_TARGET_TOOLCHAIN)/aarch64-linux-gnu-
+    DTBS := qcom/msm8998-xiaomi-sagit.dtb
 endif
 
 KERNEL_PERL := /usr/bin/perl
@@ -30,13 +31,13 @@ KERNEL_MAKE := \
     $(KERNEL_PREBUILT_MAKE)
 
 $(KERNEL_IMAGE_FILE):
-	@echo "build kernel...cp $(KERNEL_CONFIG_PATH)/$(DEFCONFIG_FILE) $(KERNEL_SRC_TMP_PATH)/arch/$(KERNEL_ARCH)/configs"
+	echo "build kernel..."
 	cp -rf $(KERNEL_CONFIG_PATH)/$(DEFCONFIG_FILE) $(KERNEL_SRC_TMP_PATH)/arch/$(KERNEL_ARCH)/configs
 	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) distclean
 	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(DEFCONFIG_FILE)
 	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) modules_prepare
 	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) -j12 $(KERNEL_IMAGE)
-	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) dtbs
+	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(DTBS)
 #	$(KERNEL_MAKE) -C $(KERNEL_SRC_TMP_PATH) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) modules modules_install
 .PHONY: build-kernel
 build-kernel: $(KERNEL_IMAGE_FILE)

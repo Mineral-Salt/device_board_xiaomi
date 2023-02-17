@@ -15,7 +15,7 @@ export KERNEL_IMAGE_FILE=${KERNEL_SRC_TMP_PATH}/arch/${KERNEL_ARCH}/boot/${KERNE
 
 LINUX_KERNEL_MAKEFILE=${PROJECT_ROOT}/device/board/xiaomi/sagit/kernel/make_kernel.mk
 
-# rm -f ${KERNEL_IMAGE_FILE}
+rm -f ${KERNEL_IMAGE_FILE}
 
 make -f ${LINUX_KERNEL_MAKEFILE}
 
